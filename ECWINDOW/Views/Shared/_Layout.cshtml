@@ -1,0 +1,153 @@
+﻿@model ecw.ViewModels.ItemViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - ECWINDOW BtoC</title>
+
+    @RenderSection("assets", false)
+</head>
+<body>
+    <div id="header_outline">
+        <div id="header">
+            <form name="top" method="get" action="top"></form>
+            <div class="logo_cell" onclick="top.submit()">
+                <div class="main_text"><span style="letter-spacing: 0.5em;">EC開発</span><br />研修セット</div>
+
+                <div class="main_logo" style="background-image:url('/images/logo/ecwindow_logo.png');"></div>
+
+            </div>
+            <!--/* 商品分類表示（スマートフォン） */-->
+            <div id="item_category_dropdown">カテゴリから選ぶ<div class="arrow_icon">▼</div></div>
+            <div id="item_category_dropdown_list">
+                <form method="post" id="execSearchByCategory" asp-controller="Search" asp-action="index">
+                    @foreach (var c1 in Model.itemCategory1List) {
+                        <div text="カテゴリ1" class="item_category_name1" onclick="searchByCategory('@c1.ItemCategory1Cd');">
+                            <p>@c1.ItemCategory1Name</p>
+                        </div>
+
+                        @foreach (var c2 in Model.itemCategory2List) {
+                            @if (c1.ItemCategory1Cd == c2.ItemCategory1Cd) {
+                                <div text="カテゴリ2" class="item_category_name2" onclick="searchByCategory('@c2.ItemCategory2Cd');">
+                                    <p>@c2.ItemCategory2Name</p>
+                                </div>
+
+                            }
+                        }
+                    }
+
+                    <input type="hidden" id="hid_c1" name="c1" />
+                    <input type="hidden" id="hid_c2" name="c2" />
+
+                </form>
+            </div>
+            <div class="search_cell">
+                <div class="keyword_wrap">
+                    <form method="post" id="execSearch" asp-controller="Search" asp-action="index">
+                        <div class="search_icon" style="background-image:url('/images/icon/search.png');"></div>
+                        <input type="text" id="keyword" name="k" maxlength="50" placeholder="キーワードを入力" />
+
+
+                        <div class="search_btn" onclick="search()">検索</div>
+                    </form>
+                </div>
+            </div>
+            <div class="joint_cell"></div>
+            <div class="last_cell">ログイン不要24時間商品検索し放題！<br>ぶらぶら散策ネットショッピングならECWINDOW</div>
+        </div>
+    </div>
+
+    <!--/* コンテンツ領域 */-->
+    <div id="main_content">
+        <!--/* コンテンツ左 */-->
+        <div class="content_left">
+            <!--/* 商品分類表示 */-->
+            <div class="item_category_box">
+                <form method="post" id="execSearchByCategoryLeft" asp-controller="Search" asp-action="index">
+                    @foreach (var c1 in Model.itemCategory1List) {
+                        <div text="カテゴリ1" class="item_category_name1" onclick="searchByCategory(@(c1.ItemCategory1Cd));">
+                            <p>@c1.ItemCategory1Name</p>
+                        </div>
+
+                        @foreach (var c2 in Model.itemCategory2List) {
+                            @if (c1.ItemCategory1Cd == c2.ItemCategory1Cd) {
+                                <div text="カテゴリ2" class="item_category_name2" onclick="searchByCategory(@(c1.ItemCategory1Cd),@(c2.ItemCategory2Cd));">
+                                    <p>@c2.ItemCategory2Name</p>
+                                </div>
+
+                            }
+                        }
+                    }
+                    <input type="hidden" id="hid_c1" name="c1" />
+                    <input type="hidden" id="hid_c2" name="c2" />
+
+                </form>
+
+            </div>
+            <div class="price_range_box">
+                <form method="post" id="execSearchByPrice" asp-controller="Search" asp-action="index">
+                    <p>価格帯</p>
+                    <div class="price_box">
+                        <input type="text" id="min_text" maxlength="10">
+                        <p>円から</p>
+                    </div>
+                    <div class="price_box">
+                        <input type="text" id="max_text" maxlength="10">
+                        <p>円まで</p>
+                    </div>
+                    <div class="button-wrapper" onclick="searchByPrice()">
+                        <button>条件で絞り込んで検索</button>
+                    </div>
+                    <input type="hidden" id="hid_min" name="min" />
+                    <input type="hidden" id="hid_max" name="max" />
+
+                </form>
+            </div>
+        </div>
+
+        <!--/* コンテンツ中央 */-->
+        <div class="content_center">
+            <!--/* 子ビューのレンダリング部分 */-->
+            @RenderBody()
+        </div>
+
+        <!--/* コンテンツ右 */-->
+        <div class="content_right">
+            <form method="post" asp-controller="Search" id="search">
+                @if (Model.rd == 9 || Model.rd == 8) {
+                    <div class="banner_right" style="background-image:url('images/サンプルバナー300x700_3.png')" onclick="onClickBanner('1');">
+                    </div>
+                }
+                @if (Model.rd == 7 || Model.rd == 6) {
+                    <div class="banner_right" style="background-image:url('images/サンプルバナー300x700_2.png')" onclick="onClickBanner('2');">
+                    </div>
+                }
+
+
+                @if (Model.rd == 5 || Model.rd == 4 || Model.rd == 3) {
+                    <div class="banner2_right" style="background-image:url('images/サンプルバナー4.png')" onclick="onClickBanner('3');">
+                    </div>
+                    <div class="banner2_right" style="background-image:url('images/サンプルバナー5.png')" onclick="onClickBanner('4');">
+                    </div>
+                }
+                @if (Model.rd == 2 || Model.rd == 1 || Model.rd == 0) {
+                    <div class="banner2_right" style="background-image:url('images/サンプルバナー6.png')" onclick="onClickBanner('5');">
+                    </div>
+                    <div class="banner2_right" style="background-image:url('images/サンプルバナー3.png')" onclick="onClickBanner('6');">
+                    </div>
+                }
+
+                <input type="hidden" name="c1" id="hid_c1">
+                <input type="hidden" name="c2" id="hid_c2">
+
+            </form>
+            <form asp-controller="top" id="top"></form>
+        </div>
+
+    </div>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

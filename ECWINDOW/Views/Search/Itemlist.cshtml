@@ -1,0 +1,118 @@
+﻿<!--/* ビューに渡されるモデルの型を明示 */-->
+@model ecw.ViewModels.ItemViewModel
+
+@{
+    ViewData["Title"] = "商品一覧";
+}
+
+@section assets{
+    <link rel="stylesheet" href="~/css/ecwpc.css" media="screen and (min-width: 768px)" />
+    <link rel="stylesheet" href="~/css/ecwsp.css" media="screen and (max-width: 767px)" />
+    <script src="~/js/lib/jquery-3.6.0.js"></script>
+    <script src="~/js/itemlist.js"></script>
+}
+
+@if (Model.c1 != null) {
+    <div class="item_category_info">
+        <div class="cat1">@Model.currentCategory1.ItemCategory1Name</div>
+        @if (Model.c2 != null) {
+            <div class="arrow">&gt;</div>
+            <div class="cat2">@Model.currentCategory2.ItemCategory2Name</div>
+        }
+    </div>
+}
+
+
+<!--/* 商品検索結果 表示/非表示 */-->
+@if (Model.items != null && Model.count > 0) {
+    <!-- キーワード表示/非表示 -->
+    @if (Model.k != null && Model.k != "") {
+        <div class="search_result_by">キーワード @Model.k で</div>
+    }
+
+    <div class="search_result_wrap">
+        <div class="count_info">検索結果が @Model.count 件ありました</div>
+        <!-- ページ数2以上 -->
+        @if (Model.count > 20) {
+            <div class="page_info">20件ずつ表示しています</div>
+        }
+    </div>
+
+    <!-- ページャ表示/非表示 -->
+    @if (Model.count > 20) {
+        <div class="pager">
+            <form method="post" asp-controller="Search" asp-action="index" id="execPaging">
+                <!--/* 総ページ数が10ページ未満の場合は、全ページ表示 */-->
+                @if (Model.count <= 200) {
+                    @for (var i = 1; i <= Math.Ceiling((decimal)Model.count / 20); i++) {
+                        <div class="page_num @((i == Model.p) ? "active" : "")" onclick="paging(@(Model.c1 ?? "null"), @(Model.c2 ?? "null"),@(Model.k ?? "null"),@(Model.min ?? "null"),@(Model.max ?? "null") ,@i )">@i</div>
+                    }
+
+                }
+                <!-- 総ページ数10ページ以上 -->
+
+                <input type="hidden" id="hid_p_c1" name="c1" />
+                <input type="hidden" id="hid_p_c2" name="c2" />
+                <input type="hidden" id="hid_p_k" name="k" />
+                <input type="hidden" id="hid_p_min" name="min" />
+                <input type="hidden" id="hid_p_max" name="max" />
+                <input type="hidden" id="hid_p_page" name="p" />
+
+            </form>
+        </div>
+        <!-- ページャ表示/非表示閉じタグ -->
+    }
+
+
+    <form method="get" asp-controller="Detail" asp-action="index" id="execDetail">
+
+        @foreach (ecw.ViewModels.Item item in Model.items) {
+            <div class="item_box">
+                <div class="item_container">
+                    <div class="item_cell" onclick="onClickItem('@item.itemCd');">
+
+                        <div class="item_image">
+                            <div class="item_image" style="background-image: url('/images/@item.itemImage1')"></div>
+                        </div>
+                        <div class="brand_name">@item.brandName</div>
+                        <div class="item_name">@item.itemName1  @item.itemName2</div>
+                        <div class="price">&yen; @String.Format("{0:N0} ", item.wholesalePrice)</div>
+
+                        @if (item.statusCd == "00") {
+                            @if (item.stockNum <= 0) {
+                                <div class="no_stock">在庫なし</div>
+                            }
+                            else if (item.stockNum <= 10) {
+                                <div class="in_stock">在庫残少</div>
+                            }
+                            else {
+                                <div class="in_stock">在庫あり</div>
+                            }
+                        }
+                        else if (item.statusCd == "01") {
+                            <div class="reserve">予約受付中</div>
+                        }
+                        else if (item.statusCd == "99") {
+                            <div class='end_of_sales'>取扱終了</div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        }
+
+        <input type="hidden" id="hid_detail_cd" name="item_cd">
+    </form>
+
+    <!-- 商品結果　表示/非表示の閉じタグ -->
+}
+
+
+<!-- 検索結果0件のメッセージ -->
+@if (Model.items == null || Model.count <= 0) {
+    <div class="no_result">@Model.common_msg["item_search_no_result"]</div>
+}
+
+
+
+

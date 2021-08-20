@@ -1,0 +1,333 @@
+@charset "UTF-8";
+
+/* 端末がPCの時に適用するスタイル */
+
+@import url("common/ecw.css");
+
+html {
+	overflow-y: scroll;
+}
+
+#header_outline {
+	display: table;
+	width: calc(100% - 50px);
+	min-width: calc(1280px - 50px);
+	height: 45px;
+	padding: 12px 25px;
+	background: linear-gradient(to bottom, #ffffff, #f8f8f6);
+	border-color: #bcbcbc;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#header {
+	display: table;
+	width: 100%;
+}
+
+#header > .logo_cell {
+	display: table-cell;
+	width: 280px;
+	min-width: 280px;
+	padding: 2px 0;
+	cursor: pointer;
+}
+
+#header > .logo_cell > .main_text {
+	float: left;
+	font-size: 11px;
+	line-height: 13px;
+	color: #484848;
+	padding: 8px 8px 7px 0;
+}
+
+#header > .logo_cell > .main_logo {
+	float: left;
+	background-size: 168px 39px;
+	width: 168px;
+	height: 39px;
+}
+
+#header > .joint_cell {
+	display: table-cell;
+	width: auto;
+	min-width: 10px;
+}
+
+#header > .search_cell {
+	display: table-cell;
+	width: 60%;
+	vertical-align: middle;
+}
+
+#header > .search_cell > .keyword_wrap {
+	display: table;
+	width: 100%;
+	min-width: 200px;
+}
+
+#header > #item_category_dropdown,
+#header > #item_category_dropdown_list {
+	display: none;
+}
+
+#header > .last_cell {
+	display: table-cell;
+	width: 320px;
+	min-width: 320px;
+	vertical-align: middle;
+	text-align: right;
+	line-height: 15px;
+	font-size: 12px;
+	padding-top: 2px;
+}
+
+#header #keyword {
+	display: block;
+	float: left;
+	width: calc(100% - 208px);
+	height: 28px;
+	border-style: solid;
+	border-color: #484848 #888888 #484848 #484848;
+	border-width: 2px 1px 2px 0;
+	padding: 2px 20px;
+	font-size: 18px;
+	letter-spacing: 0.05em;
+	user-select: text;
+}
+
+#header .search_btn {
+	display: block;
+	float: left;
+	width: 105px;
+	height: 28px;
+	padding: 2px;
+	background-color: #e8e8e8;
+	border-style: solid;
+	border-color: #484848;
+	border-width: 2px 2px 2px 0;
+	border-radius: 0 8px 8px 0;
+	color: #282828;
+	text-align: center;
+	line-height: 28px;
+	cursor: pointer;
+}
+
+#main_content {
+	display: table;
+	width: 100%;
+	min-width: 1280px;
+}
+
+#main_content .content_left {
+	display: table-cell;
+	vertical-align: top;
+	width: 210px;
+	height: 500px;
+	padding: 35px 5px 35px 35px;
+}
+
+#main_content .content_left .item_category_box {
+	display: inline-block;
+	width: 175px;
+	height: 300px;
+	padding: 15px 20px;
+	border: 1px solid #989898;
+	border-radius: 5px;
+	background: linear-gradient(to bottom, #ffffff, #fbfbf9);
+}
+
+#main_content .content_left .item_category_name1 {
+	margin-top: 10px;
+	font-size: 14px;
+	padding: 2px 0;
+	color: #484800;
+	cursor: pointer;
+	user-select: text;
+}
+
+#main_content .content_left .item_category_name1:first-child {
+	margin-top: 0;
+}
+
+#main_content .content_left .item_category_name2 {
+	margin-left: 20px;
+	font-size: 14px;
+	padding: 3px 0 2px 0;
+	color: #484800;
+	cursor: pointer;
+	user-select: text;
+}
+
+#main_content .content_left .item_category_name1:hover,
+#main_content .content_left .item_category_name2:hover {
+	text-decoration: underline;
+}
+
+/* 課題9 価格帯検索機能box */
+#main_content .content_left .price_range_box {
+	display: inline-block;
+	width: 170px;
+	height: 125px;
+	margin: 35px 0 0 0;
+	padding: 20px;
+	border: 1px solid #989898;
+	border-radius: 5px;
+	background: linear-gradient(to bottom, #ffffff, #fbfbf9);
+}
+
+#main_content .content_left .price_range_box .price_box{
+	display:flex;
+	justify-content: space-between;
+	height:20px;
+	margin-top:10px;
+	margin-bottom:10px;
+	font-size:12px;
+	color:lightslategrey;
+}
+
+#main_content .content_left .price_range_box .button-wrapper{
+	text-align: center;
+}
+
+#main_content .content_left .price_range_box .price_box input{
+	width:120px;
+	text-align:right;
+}
+
+#main_content .content_center {
+	display: table-cell;
+	width: calc(100% - 620px);
+	min-width: 400px;
+	vertical-align: top;
+	margin-top: 50px;
+	padding: 30px 50px 30px 50px;
+}
+
+#main_content .content_center .banner_area {
+	display: block;
+	width: calc(100% - 10px);
+	padding: 15px 5px 35px 5px;
+	margin-right: 45px;
+}
+
+#main_content .content_center .item_category_info {
+	display: block;
+}
+
+#main_content .content_center .item_category_info .cat1 {
+	display: inline-block;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 10px 0;
+	user-select: text;
+}
+
+#main_content .content_center .item_category_info .arrow {
+	display: inline-block;
+	font-size: 12px;
+	margin-left: 10px;
+	padding: 1px 0;
+	transform: scale(1.0, 2.0);
+	position: relative;
+	top: -5px;
+}
+
+#main_content .content_center .item_category_info .cat2 {
+	display: inline-block;
+	font-size: 19px;
+	margin-left: 10px;
+	padding: 1px 0;
+	user-select: text;
+}
+
+#main_content .content_center .search_result_by {
+	font-size: 18px;
+	padding: 1px 0;
+	user-select: text;
+}
+
+#main_content .content_center .search_result_wrap {
+	display: inline-block;
+	width: 100%;
+	font-size: 16px;
+}
+
+@media screen and ( min-width: 1601px ) {
+	#main_content .content_center .search_result_wrap .count_info {
+		display: table-cell;
+		vertical-align: bottom;
+		height: 31px;
+	}
+}
+@media screen and ( max-width: 1600px ) {
+	#main_content .content_center .search_result_wrap .count_info {
+		display: block;
+		width: 100%;
+		height: unset;
+	}
+}
+
+@media screen and ( min-width: 1601px ) {
+	#main_content .content_center .search_result_wrap .page_info {
+		display: table-cell;
+		vertical-align: bottom;
+		height: 31px;
+	}
+}
+@media screen and ( max-width: 1600px ) {
+	#main_content .content_center .search_result_wrap .page_info {
+		display: block;
+		width: 100%;
+		height: unset;
+	}
+}
+
+#main_content .content_center .item_box {
+	display: block;
+	float: left;
+	width: calc(25% - 30px);
+	max-width: 255px;
+	height: 275px;
+	margin: 15px;
+}
+
+#main_content .content_center .no_result {
+	margin: 10px 0 0 0;
+}
+
+#main_content .item_count {
+	font-size: 20px;
+	margin: 0 5px;
+}
+
+#main_content .item_image {
+	height: 150px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position-x: center;
+	background-position-y: center;
+	image-rendering: high-quality;
+}
+
+#main_content .content_right {
+	display: table-cell;
+	width: 300px;
+	padding: 35px 25px 35px 5px;
+}
+
+#main_content .content_right .banner_right{
+	height:700px;
+	cursor:pointer;
+}
+
+#main_content .content_right .banner2_right{
+	height:300px;
+	margin-bottom:100px;
+	cursor:pointer;
+}
+
+
+
+

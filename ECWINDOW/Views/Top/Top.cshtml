@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "";
+}
+@section assets{
+    <link rel="stylesheet" href="~/css/ecwpc.css" media="screen and (min-width: 768px)" />
+    <link rel="stylesheet" href="~/css/ecwsp.css" media="screen and (max-width: 767px)" />
+    <link rel="stylesheet" href="~/css/jquery.bxslider_pc.css" media="screen and (min-width: 768px)" />
+    <link rel="stylesheet" href="~/css/jquery.bxslider_sp.css" media="screen and (max-width: 767px)" />
+
+    <script src="~/js/lib/jquery-3.6.0.js"></script>
+    <script src="~/js/itemlist.js"></script>
+    <script src="~/js/lib\jquery.bxslider.js"></script>
+}
+<!-- 詳細画面遷移用のform -->
+<form method="get" action="detail" id=execSlideDetail>
+    <input type="hidden" id="hid_slide_cd" name="item_cd">
+</form>
+<div class="banner_area">
+    <!-- bxslider導入部分 -->
+    <div class="bxslider">
+        <div onclick="onClickSlide('1')"><img src="~/images/slideBanner_1920x1080_01.png"></div>
+        <div onclick="onClickSlide('2')"><img src="~/images/slideBanner_1920x1080_02.png"></div>
+        <div onclick="onClickSlide('3')"><img src="~/images/slideBanner_1920x1080_03.png"></div>
+    </div>
+</div>
+<script>
+    loadSlider()
+</script>
+
+
+

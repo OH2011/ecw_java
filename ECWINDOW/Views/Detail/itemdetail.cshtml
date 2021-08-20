@@ -1,0 +1,143 @@
+﻿<!--/* ビューに渡されるモデルの型を明示 */-->
+@model ecw.ViewModels.ItemViewModel
+
+@{
+    ViewData["Title"] = "商品詳細";
+}
+
+@section assets{
+    <link rel="stylesheet" href="~/css/ecwpc.css" media="screen and (min-width: 768px)" />
+    <link rel="stylesheet" href="~/css/ecwsp.css" media="screen and (max-width: 767px)" />
+    <link rel="stylesheet" href="~/css/detailpc.css" media="screen and (min-width: 768px)" />
+    <link rel="stylesheet" href="~/css/detailsp.css" media="screen and (max-width: 767px)" />
+    <script src="~/js/lib/jquery-3.6.0.js"></script>
+    <script src="~/js/itemlist.js"></script>
+}
+
+
+@if (Model.item == null || Model.item.itemCd == null) {
+    <div class="no_result">簡易メッセージ</div>
+}
+
+@if (Model.item != null) {
+    <div class="item_category_wrapper">
+        <form method="post" name="c1form" asp-controller="Search" asp-action="Index">
+            <input type="hidden" name="c1" value="@Model.item.itemCategory1Cd">
+            <a href="javascript:c1form.submit()" class="item_category1">@Model.item.itemCategory1Name</a>
+        </form>
+        <div>&gt;</div>
+        <form method="post" name="c2form" asp-controller="Search" asp-action="Index">
+            <input type="hidden" name="c1" value="@Model.item.itemCategory1Cd">
+            <input type="hidden" name="c2" value="@Model.item.itemCategory1Cd">
+            <a href="javascript:c2form.submit()" class="item_category2">@Model.item.itemCategory2Name</a>
+        </form>
+        <div>&gt;</div>
+        <div class="item_name">@Model.item.itemName1  @Model.item.itemName2 </div>
+    </div>
+
+    <div class="item_wrapper">
+
+        <!--/* スマホ画面専用要素 */-->
+        <div class="sp_div">
+            <div class="brand_name">@Model.item.brandName</div>
+            <div class="item_name">@Model.item.itemName1</div>
+        </div>
+
+        <div class="item_image" style="background-image:url('/images/@Model.item.itemImage1')"></div>
+        <div class="item_detail_wrapper">
+            <div class="brand_name">@Model.item.brandName</div>
+            <div class="item_name">@Model.item.itemName1</div>
+            <div class="item_price">&yen;&nbsp;@String.Format("{0:N0} ", Model.item.wholesalePrice)</div>
+            <div class="item_status">
+                @if (Model.item.statusCd == "00") {
+                    @if (Model.item.stockNum <= 0) {
+                        <div class="no_stock">在庫なし</div>
+                    }
+                    else if (Model.item.stockNum <= 10) {
+                        <div class="in_stock">在庫残少</div>
+                    }
+                    else {
+                        <div class="in_stock">在庫あり</div>
+                    }
+                }
+                else if (Model.item.statusCd == "01") {
+                    <div class="reserve">予約受付中</div>
+                }
+                else if (Model.item.statusCd == "99") {
+                    <div class='end_of_sales'>取扱終了</div>
+                }
+            </div>
+
+            <div class="code_wrapper">
+                <div class="code_name_content">
+                    @if (Model.item.itemCd != null && Model.item.itemCd != "") {
+                        <p>商品コード</p>
+                    }
+                    @if (Model.item.modelNumber != null && Model.item.modelNumber != "") {
+                        <p>型番</p>
+                    }
+                    @if (Model.item.janCd != null && Model.item.janCd != "") {
+                        <p>JANコード</p>
+                    }
+                </div>
+                <div class="code_content">
+                    @if (Model.item.itemCd != null && Model.item.itemCd != "") {
+                        <p>@Model.item.itemCd</p>
+                    }
+                    @if (Model.item.modelNumber != null && Model.item.modelNumber != "") {
+                        <p>@Model.item.modelNumber</p>
+                    }
+                    @if (Model.item.janCd != null && Model.item.janCd != "") {
+                        <p>@Model.item.janCd</p>
+                    }
+                </div>
+            </div>
+
+            @if (Model.item.description != null) {
+                <div class="description_label">商品説明</div>
+                <div class="item_description">@Model.item.description</div>
+            }
+
+
+        </div>
+    </div>
+
+    @if (Model.items != null && Model.items.Count > 0) {
+        <div class="recommendation">
+            <p>こちらもおすすめ</p>
+            <form method="get" asp-controller="Detail" asp-action="Index" id="execDetail">
+                <div class="recommend_contents_wrapper">
+
+                    @foreach (ecw.ViewModels.Item item in Model.items) {
+                        <div class="recommend_content" onclick="onClickItem('@(item.itemCd)')">
+                            <div class="item_image" style="background-image:url('/images/@item.itemImage1')"></div>
+                            <div class="brand_name">@item.brandName</div>
+                            <div class="item_name">@(item.itemName1) @(item.itemName2)</div>
+                            <div class="price">&yen; @String.Format("{0:N0} ", item.wholesalePrice)</div>
+                            <div class="item_status">
+                                @if (item.statusCd == "00") {
+                                    @if (item.stockNum <= 0) {
+                                        <div class="no_stock">在庫なし</div>
+                                    }
+                                    else if (item.stockNum <= 10) {
+                                        <div class="in_stock">在庫残少</div>
+                                    }
+                                    else {
+                                        <div class="in_stock">在庫あり</div>
+                                    }
+                                }
+                                else if (item.statusCd == "01") {
+                                    <div class="reserve">予約受付中</div>
+                                }
+                                else if (item.statusCd == "99") {
+                                    <div class='end_of_sales'>取扱終了</div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <input type="hidden" id="hid_detail_cd" name="item_cd">
+            </form>
+        </div>
+    }
+}

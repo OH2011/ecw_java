@@ -1,0 +1,173 @@
+@charset "UTF-8";
+
+#main_content .content_center .item_category_wrapper{
+	display:none;
+}
+
+#main_content .content_center .item_wrapper .sp_div .brand_name{
+	margin-top:10px;
+	font-weight:bold;
+}
+
+#main_content .content_center .item_wrapper .sp_div .item_name{
+	font-weight:900;
+	font-size:20px;
+	margin-top:7px;
+}
+
+#main_content .content_center .item_wrapper .item_image{
+	height:300px;
+	margin-top:40px;
+	margin-bottom:20px;
+	margin-left:20px;
+	margin-right:20px;
+	background-repeat:no-repeat;
+  	background-position:50%;
+  	background-size:contain;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .brand_name{
+	display:none;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_name{
+	display:none;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_price{
+	text-align:right;
+	font-size:20px;
+	font-weight:bold;
+	color:red;
+	margin-top:20px;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_status *{
+	font-size: 15px;
+	font-weight: bold;
+	margin: 18px 0;
+	text-align:right;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_status .in_stock{
+	color:RGB(0,160,0);
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_status .no_stock{
+	color:RGB(152,152,152);
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_status .reserve{
+	color:RGB(36,72,248);
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_status .end_of_sales{
+	color:RGB(152,152,152);
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .code_wrapper{
+	display:flex;
+	justify-content:space-around;
+	margin-top:18px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border:1px solid;
+	border-color: #888888;
+	border-left:transparent;
+	border-right:transparent;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .code_wrapper .code_name_content,.code_content{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .code_wrapper .code_name_content *{
+	margin:5px;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .code_wrapper .code_content *{
+	margin:5px;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .description_label{
+	margin-top:30px;
+}
+
+#main_content .content_center .item_wrapper .item_detail_wrapper .item_description{
+	margin:20px 0;
+}
+
+#main_content .content_center .recommendation{
+	border-top:1px solid;
+	border-color: #888888;
+	padding-top:30px;
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper{
+	margin-top:30px;
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content{
+	width:42%;
+	margin:3%;
+	cursor:pointer;
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .brand_name{
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: underline;
+	line-height: 16px;
+	word-break: break-all;
+	user-select: text;
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .item_name{
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: underline;
+	line-height: 16px;
+	word-break: break-all;
+	user-select: text;
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .price{
+	font-size: 16px;
+	font-weight: bold;
+	color: #ff2c2c;
+	line-height: 15px;
+	word-break: break-all;
+	margin: 8px 0 4px 0;
+	user-select: text;
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .item_status *{
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 15px;
+	word-break: break-all;
+	margin: 6px 0;
+	user-select: text;
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .item_status .in_stock{
+	color:RGB(0,160,0);
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .item_status .no_stock{
+	color:RGB(152,152,152);
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .item_status .reserve{
+	color:RGB(36,72,248);
+}
+
+#main_content .content_center .recommendation .recommend_contents_wrapper .recommend_content .item_status .end_of_sales{
+	color:RGB(152,152,152);
+}
+
